@@ -1,5 +1,10 @@
 # Socializ
 
+[![CI](https://github.com/socializ-co/socializ/actions/workflows/ci.yml/badge.svg)](https://github.com/socializ-co/socializ/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/socializ-co/socializ/actions/workflows/codeql.yml/badge.svg)](https://github.com/socializ-co/socializ/actions/workflows/codeql.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/socializ-co/socializ/badge)](https://scorecard.dev/viewer/?uri=github.com/socializ-co/socializ)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+
 Socializ is an open-source social platform built as a modular Nx monorepo. The repository contains the web application, API, documentation site, end-to-end tests, and bounded-context libraries that make up the platform.
 
 > The project is under active development. APIs and domain boundaries may change until the first stable release.
@@ -9,7 +14,7 @@ Socializ is an open-source social platform built as a modular Nx monorepo. The r
 | Project     | Purpose                  | Local URL                 |
 | ----------- | ------------------------ | ------------------------- |
 | `apps/web`  | Socializ web application | http://localhost:3000     |
-| `apps/api`  | NestJS API               | http://localhost:3000/api |
+| `apps/api`  | NestJS API               | http://localhost:3001/api |
 | `apps/docs` | Fumadocs documentation   | http://localhost:3003     |
 
 The workspace also contains Nx-managed end-to-end projects and shared libraries under `libs/`.
@@ -39,7 +44,7 @@ npm run dev:api
 npm run dev:docs
 ```
 
-Run each command in a separate terminal. The API and web app currently share the default port, so use a different `PORT` when running them at the same time.
+Run each command in a separate terminal. The web app uses port `3000`, the API uses port `3001`, and the documentation site uses port `3003` by default.
 
 ## Common commands
 
@@ -79,6 +84,8 @@ Domain libraries follow the Socializ context and layer conventions. Keep busines
 Start at [`apps/docs/content/docs/index.mdx`](apps/docs/content/docs/index.mdx). Documentation is built with Fumadocs and runs on port `3003`.
 
 When adding a feature, update the relevant documentation and include an architecture decision record for a cross-cutting design choice.
+
+The project roadmap is in [`ROADMAP.md`](ROADMAP.md), and architecture decision records are kept under [`docs/adr`](docs/adr/README.md).
 
 ## Contributing
 
