@@ -8,6 +8,102 @@
     "lib": ["es2022"],
     "module": "nodenext",
     "moduleResolution": "nodenext",
+    "paths": {
+      "@socializ-ee/licensing": ["./enterprise/libs/licensing/src/index.ts"],
+      "@socializ-ee/licensing/domain": [
+        "./enterprise/libs/licensing/src/domain/index.ts"
+      ],
+      "@socializ-ee/licensing/application": [
+        "./enterprise/libs/licensing/src/application/index.ts"
+      ],
+      "@socializ-ee/licensing/adapters/inbound/http": [
+        "./enterprise/libs/licensing/src/adapters/inbound/http/index.ts"
+      ],
+      "@socializ-ee/licensing/adapters/outbound": [
+        "./enterprise/libs/licensing/src/adapters/outbound/index.ts"
+      ],
+      "@socializ-ee/licensing/infrastructure/nest": [
+        "./enterprise/libs/licensing/src/infrastructure/nest/index.ts"
+      ],
+      "@socializ-ee/organization": [
+        "./enterprise/libs/organization/src/index.ts"
+      ],
+      "@socializ-ee/organization/domain": [
+        "./enterprise/libs/organization/src/domain/index.ts"
+      ],
+      "@socializ-ee/organization/application": [
+        "./enterprise/libs/organization/src/application/index.ts"
+      ],
+      "@socializ-ee/organization/adapters/inbound/http": [
+        "./enterprise/libs/organization/src/adapters/inbound/http/index.ts"
+      ],
+      "@socializ-ee/organization/adapters/outbound": [
+        "./enterprise/libs/organization/src/adapters/outbound/index.ts"
+      ],
+      "@socializ-ee/organization/infrastructure/nest": [
+        "./enterprise/libs/organization/src/infrastructure/nest/index.ts"
+      ],
+      "@socializ-ee/ac": ["./enterprise/libs/ac/src/index.ts"],
+      "@socializ-ee/ac/domain": ["./enterprise/libs/ac/src/domain/index.ts"],
+      "@socializ-ee/ac/application": [
+        "./enterprise/libs/ac/src/application/index.ts"
+      ],
+      "@socializ-ee/ac/adapters/inbound/http": [
+        "./enterprise/libs/ac/src/adapters/inbound/http/index.ts"
+      ],
+      "@socializ-ee/ac/adapters/outbound": [
+        "./enterprise/libs/ac/src/adapters/outbound/index.ts"
+      ],
+      "@socializ-ee/ac/infrastructure/nest": [
+        "./enterprise/libs/ac/src/infrastructure/nest/index.ts"
+      ],
+      "@socializ-ee/sso": ["./enterprise/libs/sso/src/index.ts"],
+      "@socializ-ee/sso/domain": ["./enterprise/libs/sso/src/domain/index.ts"],
+      "@socializ-ee/sso/application": [
+        "./enterprise/libs/sso/src/application/index.ts"
+      ],
+      "@socializ-ee/sso/adapters/inbound/http": [
+        "./enterprise/libs/sso/src/adapters/inbound/http/index.ts"
+      ],
+      "@socializ-ee/sso/adapters/outbound": [
+        "./enterprise/libs/sso/src/adapters/outbound/index.ts"
+      ],
+      "@socializ-ee/sso/infrastructure/nest": [
+        "./enterprise/libs/sso/src/infrastructure/nest/index.ts"
+      ],
+      "@socializ-ee/audit-log": ["./enterprise/libs/audit-log/src/index.ts"],
+      "@socializ-ee/audit-log/domain": [
+        "./enterprise/libs/audit-log/src/domain/index.ts"
+      ],
+      "@socializ-ee/audit-log/application": [
+        "./enterprise/libs/audit-log/src/application/index.ts"
+      ],
+      "@socializ-ee/audit-log/adapters/inbound/http": [
+        "./enterprise/libs/audit-log/src/adapters/inbound/http/index.ts"
+      ],
+      "@socializ-ee/audit-log/adapters/outbound": [
+        "./enterprise/libs/audit-log/src/adapters/outbound/index.ts"
+      ],
+      "@socializ-ee/audit-log/infrastructure/nest": [
+        "./enterprise/libs/audit-log/src/infrastructure/nest/index.ts"
+      ],
+      "@socializ-ee/quota": ["./enterprise/libs/quota/src/index.ts"],
+      "@socializ-ee/quota/domain": [
+        "./enterprise/libs/quota/src/domain/index.ts"
+      ],
+      "@socializ-ee/quota/application": [
+        "./enterprise/libs/quota/src/application/index.ts"
+      ],
+      "@socializ-ee/quota/adapters/inbound/http": [
+        "./enterprise/libs/quota/src/adapters/inbound/http/index.ts"
+      ],
+      "@socializ-ee/quota/adapters/outbound": [
+        "./enterprise/libs/quota/src/adapters/outbound/index.ts"
+      ],
+      "@socializ-ee/quota/infrastructure/nest": [
+        "./enterprise/libs/quota/src/infrastructure/nest/index.ts"
+      ]
+    },
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
