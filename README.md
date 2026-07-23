@@ -63,6 +63,27 @@ For a focused change, prefer affected tasks:
 npx nx affected -t lint test build
 ```
 
+## Enterprise edition submodule
+
+The enterprise edition lives in the private [`socializ-ee`](https://github.com/socializ-co/socializ-ee) repository. It is mounted as the `enterprise/` submodule and contains source-only libraries under `enterprise/libs/<context>/...`. The public workspace intentionally excludes this submodule from its Nx project graph and formatting checks.
+
+Public contributors do not need the private submodule to work on Socializ. Maintainers with access can initialize it with:
+
+```bash
+git submodule update --init --recursive
+```
+
+To update the pointer to a newer private commit:
+
+```bash
+git -C enterprise fetch origin main
+git -C enterprise checkout origin/main
+git add enterprise
+git commit -m "chore: update enterprise edition submodule"
+```
+
+The `Private EE submodule` workflow checks the pointer on pushes to `main` and manual runs. Configure the `PRIVATE_SUBMODULE_SSH_KEY` Actions secret in the public repository with a read-only deploy key whose public half is registered in `socializ-ee` under **Settings → Deploy keys**. Never commit the private key to either repository.
+
 ## Project structure
 
 ```text
@@ -72,6 +93,8 @@ apps/
 ├── web/          # Next.js application
 ├── api-e2e/      # API end-to-end tests
 └── web-e2e/      # browser end-to-end tests
+
+enterprise/       # private source-only submodule (maintainers only)
 
 libs/
 └── ...           # shared and bounded-context libraries
