@@ -23,8 +23,8 @@ The workspace also contains Nx-managed end-to-end projects and shared libraries 
 
 ### Requirements
 
-- Node.js 22 or newer
-- npm 10 or newer
+- Node.js 22.x
+- npm 10.9.8
 - Git
 
 ### Install
