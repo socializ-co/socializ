@@ -1,10 +1,12 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "lib": ["es2022", "dom"],
     "outDir": "out-tsc/api-e2e",
     "esModuleInterop": true,
     "noUnusedLocals": false,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "types": ["node", "jest"]
   },
   "include": ["jest.config.ts", "src/**/*.ts"],
   "references": []

@@ -1,6 +1,7 @@
 # Replace this team with the maintainers team that owns the repository.
 # The team must exist in the socializ-co GitHub organization before required
 # code-owner reviews are enabled in branch protection or repository rules.
+/.github/ @socializ-co/maintainers
 * @socializ-co/maintainers
 
 /apps/api/ @socializ-co/maintainers

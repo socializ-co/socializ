@@ -2,7 +2,7 @@ name: Feature request
 description: Propose an improvement to Socializ.
 title: '[Feature]: '
 labels:
-  - enhancement
+  - feature
 body:
   - type: textarea
     id: problem

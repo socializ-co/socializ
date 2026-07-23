@@ -2,7 +2,12 @@
 
 ## Supported versions
 
-Socializ is under active development. Security fixes are applied to the default branch and to the latest published release when releases exist.
+Socializ is under active development and does not have a stable release line yet.
+
+| Version               | Supported   |
+| --------------------- | ----------- |
+| `main`                | Yes         |
+| Pre-release snapshots | Best effort |
 
 ## Reporting a vulnerability
 
