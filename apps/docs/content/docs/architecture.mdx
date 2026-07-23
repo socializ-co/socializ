@@ -1,0 +1,36 @@
+---
+title: Architecture
+description: The boundaries and responsibilities of the Socializ monorepo.
+---
+
+# Architecture
+
+Socializ is an Nx monorepo organized around deployable applications and domain-oriented libraries.
+
+## Applications
+
+- `apps/web` is the Next.js product interface.
+- `apps/api` is the NestJS backend and HTTP entrypoint.
+- `apps/docs` is the Fumadocs documentation site.
+- `apps/*-e2e` contains end-to-end test projects.
+
+## Library boundaries
+
+Domain code should not depend on HTTP, framework modules, or persistence implementations. Application services coordinate use cases, adapters translate external protocols, and infrastructure composes framework-specific implementations.
+
+Keep imports aligned with the Nx project tags and use public library entrypoints instead of importing another project's internal files.
+
+## Adding a bounded context
+
+When adding a new business area, create the layers that are required by the use case:
+
+```text
+libs/ee/<context>/
+├── domain/
+├── application/
+├── adapters/inbound/http/
+├── adapters/outbound/
+└── infrastructure/nest/
+```
+
+Do not create an empty layer only for symmetry. Every library should have a clear owner, public API, tests, and documentation when it becomes part of the platform contract.

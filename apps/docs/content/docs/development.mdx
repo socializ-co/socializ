@@ -1,0 +1,29 @@
+---
+title: Development workflow
+description: Commands and expectations for day-to-day Socializ development.
+---
+
+# Development workflow
+
+## Useful commands
+
+```bash
+npx nx graph
+npx nx show projects
+npx nx affected -t lint test build
+npx nx run <project>:<target>
+```
+
+Use `nx affected` for focused changes and `run-many` when validating the whole workspace.
+
+## Tests
+
+Unit tests live next to the project they cover. End-to-end tests live in the corresponding `apps/*-e2e` project. A behavior change should include a test at the lowest useful level.
+
+## Formatting and linting
+
+The repository uses ESLint and Prettier. Run `npm run format:check` before opening a pull request. Do not commit generated output, local `.env` files, `.next` folders, or Nx cache files.
+
+## Documentation changes
+
+Add or update MDX files in `apps/docs/content/docs`. Architecture decisions that affect more than one bounded context should be recorded in an ADR and linked from the relevant documentation page.

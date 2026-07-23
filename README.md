@@ -1,109 +1,95 @@
 # Socializ
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Socializ is an open-source social platform built as a modular Nx monorepo. The repository contains the web application, API, documentation site, end-to-end tests, and bounded-context libraries that make up the platform.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+> The project is under active development. APIs and domain boundaries may change until the first stable release.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## What is in this repository?
 
-## Generate a library
+| Project     | Purpose                  | Local URL                 |
+| ----------- | ------------------------ | ------------------------- |
+| `apps/web`  | Socializ web application | http://localhost:3000     |
+| `apps/api`  | NestJS API               | http://localhost:3000/api |
+| `apps/docs` | Fumadocs documentation   | http://localhost:3003     |
 
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+The workspace also contains Nx-managed end-to-end projects and shared libraries under `libs/`.
+
+## Quick start
+
+### Requirements
+
+- Node.js 22 or newer
+- npm 10 or newer
+- Git
+
+### Install
+
+```bash
+git clone https://github.com/socializ-co/socializ.git
+cd socializ
+npm ci
+cp .env.example .env.local
 ```
 
-## Run tasks
+### Run an app
 
-To build the library use:
-
-```sh
-npx nx build pkg1
+```bash
+npm run dev:web
+npm run dev:api
+npm run dev:docs
 ```
 
-To run any task with Nx use:
+Run each command in a separate terminal. The API and web app currently share the default port, so use a different `PORT` when running them at the same time.
 
-```sh
-npx nx <target> <project-name>
+## Common commands
+
+```bash
+npm run lint           # lint every project with a lint target
+npm run test           # run unit tests
+npm run build          # build every project with a build target
+npm run typecheck     # run TypeScript checks where configured
+npm run format:check  # verify formatting
+npx nx graph           # inspect project dependencies
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+For a focused change, prefer affected tasks:
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Versioning and releasing
-
-To version and release the library use
-
-```
-npx nx release
+```bash
+npx nx affected -t lint test build
 ```
 
-Pass `--dry-run` to see what would happen without actually releasing the library.
+## Project structure
 
-[Learn more about Nx release &raquo;](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```text
+apps/
+├── api/          # NestJS application
+├── docs/         # Fumadocs site
+├── web/          # Next.js application
+├── api-e2e/      # API end-to-end tests
+└── web-e2e/      # browser end-to-end tests
 
-## Keep TypeScript project references up to date
-
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
-
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
-
-```sh
-npx nx sync
+libs/
+└── ...           # shared and bounded-context libraries
 ```
 
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
+Domain libraries follow the Socializ context and layer conventions. Keep business rules in domain/application libraries and keep framework or transport details at the adapter and infrastructure boundaries.
 
-```sh
-npx nx sync:check
-```
+## Documentation
 
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
+Start at [`apps/docs/content/docs/index.mdx`](apps/docs/content/docs/index.mdx). Documentation is built with Fumadocs and runs on port `3003`.
 
-## Set up CI!
+When adding a feature, update the relevant documentation and include an architecture decision record for a cross-cutting design choice.
 
-### Step 1
+## Contributing
 
-To connect to Nx Cloud, run the following command:
+Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) before opening an issue or pull request. Issues and pull requests should explain the problem, the proposed change, and how it was tested.
 
-```sh
-npx nx connect
-```
+Good starting points are issues labelled `good first issue`, `help wanted`, or `documentation`.
 
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
+## Security
 
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Do not report security vulnerabilities in public issues. Follow [`SECURITY.md`](SECURITY.md) for the private disclosure process.
 
-### Step 2
+## License
 
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Socializ is released under the [Apache License 2.0](LICENSE).

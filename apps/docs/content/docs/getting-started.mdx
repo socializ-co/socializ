@@ -1,0 +1,41 @@
+---
+title: Getting started
+description: Run Socializ locally and make your first change.
+---
+
+# Getting started
+
+## Requirements
+
+- Node.js 22 or newer
+- npm 10 or newer
+- Git
+
+## Install
+
+```bash
+git clone https://github.com/socializ-co/socializ.git
+cd socializ
+npm ci
+cp .env.example .env.local
+```
+
+## Run the applications
+
+Run each application in its own terminal:
+
+```bash
+npm run dev:web
+npm run dev:api
+npm run dev:docs
+```
+
+The web app runs on port `3000`, the API uses the `PORT` environment variable, and the documentation site runs on port `3003`.
+
+## Verify a change
+
+```bash
+npm run lint
+npm run test
+npm run build
+```

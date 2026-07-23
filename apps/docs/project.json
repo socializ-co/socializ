@@ -1,0 +1,16 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "docs",
+  "sourceRoot": "apps/docs",
+  "projectType": "application",
+  "targets": {
+    "dev": {
+      "continuous": true,
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/docs",
+        "command": "next dev --port 3003"
+      }
+    }
+  }
+}
