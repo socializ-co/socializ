@@ -57,3 +57,6 @@ out
 
 # Fumadocs generated source
 **/.source
+
+# Temporary local checkout created outside the repository structure
+/libs 22-35-01-904/

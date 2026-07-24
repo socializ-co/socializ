@@ -46,6 +46,26 @@ npm run dev:docs
 
 Run each command in a separate terminal. The web app uses port `3000`, the API uses port `3001`, and the documentation site uses port `3003` by default.
 
+## Container images
+
+The repository publishes three editions to GitHub Container Registry:
+
+| Edition               | Workflow                         | Image prefix                           | Private source          |
+| --------------------- | -------------------------------- | -------------------------------------- | ----------------------- |
+| Community self-hosted | `Self-hosted Release`            | `ghcr.io/socializ-co/socializ-*`       | No                      |
+| EE self-hosted        | `Self-hosted Enterprise Release` | `ghcr.io/socializ-co/socializ-ee-*`    | `enterprise/` submodule |
+| Cloud                 | `Cloud Release`                  | `ghcr.io/socializ-co/socializ-cloud-*` | `enterprise/` submodule |
+
+All workflows build `linux/amd64` and `linux/arm64` images and publish SBOM and provenance attestations for pushed images. Community images build on pull requests and `main`; EE self-hosted images use `ee-v*.*.*` tags; cloud images use `cloud-v*.*.*` tags.
+
+Pull the latest images with:
+
+```bash
+docker pull ghcr.io/socializ-co/socializ-api:latest
+docker pull ghcr.io/socializ-co/socializ-web:latest
+docker pull ghcr.io/socializ-co/socializ-docs:latest
+```
+
 ## Common commands
 
 ```bash
@@ -82,7 +102,7 @@ git add enterprise
 git commit -m "chore: update enterprise edition submodule"
 ```
 
-The `Private EE submodule` workflow checks the pointer on pushes to `main` and manual runs. Configure the `PRIVATE_SUBMODULE_SSH_KEY` Actions secret in the public repository with a read-only deploy key whose public half is registered in `socializ-ee` under **Settings → Deploy keys**. Never commit the private key to either repository.
+The `Verify Enterprise Submodule` workflow checks the pointer on pushes to `main` and manual runs. Configure the `ENTERPRISE_DEPLOY_KEY` Actions secret in the public repository with a read-only deploy key whose public half is registered in `socializ-ee` under **Settings → Deploy keys**. Never commit the private key to either repository.
 
 ## Project structure
 
