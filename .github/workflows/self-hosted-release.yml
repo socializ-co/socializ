@@ -32,6 +32,8 @@ env:
 
 jobs:
   publish:
+    # Temporarily disabled while the container build is being stabilized.
+    if: ${{ false }}
     name: Build ${{ matrix.image }} image
     runs-on: ubuntu-latest
     timeout-minutes: 30
