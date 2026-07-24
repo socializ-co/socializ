@@ -4,6 +4,13 @@
   "sourceRoot": "apps/docs",
   "projectType": "application",
   "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/docs",
+        "command": "next build --webpack"
+      }
+    },
     "dev": {
       "continuous": true,
       "executor": "nx:run-commands",
