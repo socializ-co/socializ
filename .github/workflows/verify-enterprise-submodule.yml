@@ -1,4 +1,4 @@
-name: Private EE submodule
+name: Verify Enterprise Submodule
 
 on:
   workflow_dispatch:
@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           submodules: recursive
-          ssh-key: ${{ secrets.PRIVATE_SUBMODULE_SSH_KEY }}
+          ssh-key: ${{ secrets.ENTERPRISE_DEPLOY_KEY }}
           persist-credentials: false
 
       - name: Verify private source tree
