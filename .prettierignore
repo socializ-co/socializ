@@ -7,3 +7,4 @@ out
 **/.source
 package-lock.json
 enterprise
+libs/core/database/prisma

@@ -34,22 +34,32 @@ jobs:
       matrix:
         include:
           - image: api
+            edition: EE
             dockerfile: apps/api/Dockerfile
           - image: web
+            edition: EE
             dockerfile: apps/web/Dockerfile
           - image: docs
+            edition: EE
             dockerfile: apps/docs/Dockerfile
 
     steps:
-      - name: Check out repository and private enterprise submodule
+      - name: Check out public repository
         uses: actions/checkout@v7
         with:
-          submodules: recursive
-          ssh-key: ${{ secrets.ENTERPRISE_DEPLOY_KEY }}
           persist-credentials: false
 
-      - name: Verify private enterprise source
-        run: test -f enterprise/libs/ac/src/domain/index.ts
+      - name: Check out private Enterprise source
+        uses: ./.github/actions/checkout-enterprise
+        with:
+          token: ${{ secrets.ENTERPRISE_REPOSITORY_TOKEN }}
+
+      - name: Verify private enterprise package
+        run: >-
+          test -f enterprise/packages/auth/package.json &&
+          test -f enterprise/packages/auth/src/index.ts &&
+          test -f enterprise/packages/license/package.json &&
+          test -f enterprise/packages/license/src/index.ts
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v4
@@ -82,6 +92,8 @@ jobs:
           context: .
           file: ${{ matrix.dockerfile }}
           platforms: linux/amd64,linux/arm64
+          build-args: |
+            NEXT_PUBLIC_EDITION=${{ matrix.edition }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

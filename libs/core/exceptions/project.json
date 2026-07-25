@@ -1,0 +1,23 @@
+{
+  "name": "core-exceptions",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/core/exceptions/src",
+  "projectType": "library",
+  "tags": ["type:library", "scope:core", "layer:domain"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "libs/core/exceptions",
+        "command": "tsc -p tsconfig.lib.json"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "libs/core/exceptions",
+        "command": "tsc -p tsconfig.lib.json --noEmit"
+      }
+    }
+  }
+}

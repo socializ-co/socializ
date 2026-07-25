@@ -1,0 +1,33 @@
+name: Checkout Enterprise
+
+description: Checkout the private Socializ Enterprise repository into the CI workspace
+
+inputs:
+  token:
+    description: Read token for socializ-co/socializ-ee
+    required: true
+  ref:
+    description: Enterprise branch, tag, or commit to build
+    required: false
+    default: main
+  repository:
+    description: Private Enterprise repository
+    required: false
+    default: socializ-co/socializ-ee
+  path:
+    description: Workspace path for the private source
+    required: false
+    default: enterprise
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout private Enterprise source
+      uses: actions/checkout@v7
+      with:
+        repository: ${{ inputs.repository }}
+        ref: ${{ inputs.ref }}
+        token: ${{ inputs.token }}
+        path: ${{ inputs.path }}
+        fetch-depth: 1
+        persist-credentials: false

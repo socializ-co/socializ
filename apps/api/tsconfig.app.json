@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "types": ["node"],
-    "rootDir": "src",
+    "rootDir": "../..",
     "tsBuildInfoFile": "dist/tsconfig.app.tsbuildinfo",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -14,7 +14,11 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts"],
+  "include": [
+    "src/**/*.ts",
+    "../../libs/auth/src/**/*.ts",
+    "../../libs/core/database/src/**/*.ts"
+  ],
   "exclude": [
     "out-tsc",
     "dist",

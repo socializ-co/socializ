@@ -40,6 +40,8 @@ import {
 } from '@/components/ui/table';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { Logo } from '@/components/brand/logo';
+import { editionConfig } from '@/lib/edition';
 import { cn } from '@/lib/utils';
 
 const navigation = [
@@ -75,10 +77,10 @@ export default function Home() {
     <div className="min-h-svh bg-background text-foreground">
       <aside className="hidden border-r bg-card lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
         <div className="flex h-16 items-center gap-2 px-6">
-          <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Zap className="size-4" />
-          </div>
-          <span className="font-semibold tracking-tight">Socializ</span>
+          <Logo />
+          <Badge variant="outline" className="ml-auto text-[10px]">
+            {editionConfig.label}
+          </Badge>
         </div>
 
         <Separator />

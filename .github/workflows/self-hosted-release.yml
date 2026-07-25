@@ -47,10 +47,13 @@ jobs:
       matrix:
         include:
           - image: api
+            edition: CE
             dockerfile: apps/api/Dockerfile
           - image: web
+            edition: CE
             dockerfile: apps/web/Dockerfile
           - image: docs
+            edition: CE
             dockerfile: apps/docs/Dockerfile
 
     steps:
@@ -93,6 +96,8 @@ jobs:
           context: .
           file: ${{ matrix.dockerfile }}
           platforms: linux/amd64,linux/arm64
+          build-args: |
+            NEXT_PUBLIC_EDITION=${{ matrix.edition }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
