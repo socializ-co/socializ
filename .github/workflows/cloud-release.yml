@@ -1,0 +1,111 @@
+name: Cloud Release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'cloud-v*.*.*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloud-release-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_PREFIX: socializ-co/socializ-cloud
+
+jobs:
+  publish:
+    # Temporarily disabled while the container build is being stabilized.
+    if: ${{ false }}
+    name: Build cloud ${{ matrix.image }} image
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - image: api
+            edition: CL
+            dockerfile: apps/api/Dockerfile
+          - image: web
+            edition: CL
+            dockerfile: apps/web/Dockerfile
+          - image: docs
+            edition: CL
+            dockerfile: apps/docs/Dockerfile
+
+    steps:
+      - name: Check out public repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Check out private Enterprise source
+        uses: ./.github/actions/checkout-enterprise
+        with:
+          token: ${{ secrets.ENTERPRISE_REPOSITORY_TOKEN }}
+
+      - name: Verify private enterprise package
+        run: >-
+          test -f enterprise/packages/auth/package.json &&
+          test -f enterprise/packages/auth/src/index.ts &&
+          test -f enterprise/packages/license/package.json &&
+          test -f enterprise/packages/license/src/index.ts
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v4
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract image metadata
+        id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_PREFIX }}-${{ matrix.image }}
+          tags: |
+            type=ref,event=tag
+            type=ref,event=branch
+            type=sha,format=long,prefix=sha-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push image
+        id: build
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: ${{ matrix.dockerfile }}
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            NEXT_PUBLIC_EDITION=${{ matrix.edition }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          annotations: ${{ steps.meta.outputs.annotations }}
+          cache-from: type=gha,scope=cloud-${{ matrix.image }}
+          cache-to: type=gha,mode=max,scope=cloud-${{ matrix.image }}
+          provenance: mode=max
+          sbom: true
+
+      - name: Generate image attestation
+        uses: actions/attest@v4
+        with:
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_PREFIX }}-${{ matrix.image }}
+          subject-digest: ${{ steps.build.outputs.digest }}
+          push-to-registry: true

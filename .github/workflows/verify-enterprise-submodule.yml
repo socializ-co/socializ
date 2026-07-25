@@ -1,0 +1,37 @@
+name: Verify Enterprise Packages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: private-enterprise-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Check private Enterprise packages
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out public repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Check out private Enterprise source
+        uses: ./.github/actions/checkout-enterprise
+        with:
+          token: ${{ secrets.ENTERPRISE_REPOSITORY_TOKEN }}
+
+      - name: Verify private package tree
+        run: >-
+          test -f enterprise/packages/auth/package.json &&
+          test -f enterprise/packages/auth/src/index.ts &&
+          test -f enterprise/packages/license/package.json &&
+          test -f enterprise/packages/license/src/index.ts

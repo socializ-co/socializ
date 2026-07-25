@@ -1,0 +1,31 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Dynamic vibrant orange gradient -->
+    <linearGradient id="main-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF512F" />
+      <stop offset="100%" stop-color="#F09819" />
+    </linearGradient>
+  </defs>
+
+  <!-- The stylized thick geometric 'S' Ribbon -->
+  <path d="M 156 208 
+           L 100 208 
+           C 32 208, 32 128, 100 128 
+           L 156 128 
+           C 224 128, 224 48, 156 48 
+           L 100 48" 
+        fill="none" 
+        stroke="url(#main-grad)" 
+        stroke-width="40" 
+        stroke-linecap="round"/>
+
+  <!-- Network Nodes (Social Connection Points) -->
+  <circle cx="100" cy="48" r="14" fill="#FFFFFF" />
+  <circle cx="128" cy="128" r="14" fill="#FFFFFF" />
+  <circle cx="156" cy="208" r="14" fill="#FFFFFF" />
+
+  <!-- Inner dots matching the orange theme -->
+  <circle cx="100" cy="48" r="6" fill="url(#main-grad)" />
+  <circle cx="128" cy="128" r="6" fill="url(#main-grad)" />
+  <circle cx="156" cy="208" r="6" fill="url(#main-grad)" />
+</svg>

@@ -4,6 +4,7 @@
 dist
 tmp
 out-tsc
+libs/core/database/src/generated/prisma/
 
 # dependencies
 node_modules
@@ -57,3 +58,9 @@ out
 
 # Fumadocs generated source
 **/.source
+
+# Temporary local checkout created outside the repository structure
+/libs 22-35-01-904/
+
+# Generated Enterprise package bridge
+libs/auth/src/enterprise-auth.generated.ts

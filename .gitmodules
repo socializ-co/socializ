@@ -1,4 +1,3 @@
 [submodule "enterprise"]
 	path = enterprise
-	url = git@github.com:socializ-co/socializ-ee.git
-	branch = main
+	url = https://github.com/socializ-co/socializ-ee.git

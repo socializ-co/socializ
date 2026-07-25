@@ -9,6 +9,9 @@
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "paths": {
+      "@socializ/auth": ["./libs/auth/src/index.ts"],
+      "@socializ/core-database": ["./libs/core/database/src/index.ts"],
+      "@socializ/core-exceptions": ["./libs/core/exceptions/src/index.ts"],
       "@socializ-ee/licensing": ["./enterprise/libs/licensing/src/index.ts"],
       "@socializ-ee/licensing/domain": [
         "./enterprise/libs/licensing/src/domain/index.ts"
@@ -102,7 +105,8 @@
       ],
       "@socializ-ee/quota/infrastructure/nest": [
         "./enterprise/libs/quota/src/infrastructure/nest/index.ts"
-      ]
+      ],
+      "@socializ-ee/auth": ["./enterprise/packages/auth/src/index.ts"]
     },
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
